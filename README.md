@@ -15,6 +15,8 @@ sudo ufw enable
 ## 2. Update Ubuntu
 ```
 sudo apt update
+```
+```
 sudo apt -y upgradde
 
 ```
