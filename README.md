@@ -163,6 +163,7 @@ chmod +x -R /var/www/php_wordpress/phpinfo.php
 
 ```
 
+
 ## 8. Install Wordpress.
 
 ```
@@ -183,6 +184,10 @@ mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
 ```
 ```
 chown www-data:www-data -R *
+
+```
+```
+systemctl restart nginx.service
 
 ```
 
