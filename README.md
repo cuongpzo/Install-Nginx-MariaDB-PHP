@@ -1,4 +1,4 @@
-# Install Nginx - MariaDB - PHP (+Install Wordpres)
+# Install Nginx - MariaDB - PHP (+Install Wordpress)
 ## Pre-Install 
 ```
 sudo apt install -y openssh-client openssh-server net-tools curl python3 unzip zip default-jre tasksel perl nano
