@@ -1,4 +1,4 @@
-# Install Nginx - MariaDB - PHP
+# Install Nginx - MariaDB - PHP (+Install Wordpres)
 ## Pre-Install 
 ```
 sudo apt install -y openssh-client openssh-server net-tools curl python3 unzip zip default-jre tasksel perl nano
@@ -35,7 +35,31 @@ sudo add-apt-repository ppa:ondrej/php
 sudo apt install -y php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-dev php-imap php-mbstring php-opcache php-soap php-zip php-gmp php-intl php-fpm  php-dom php-json php-fileinfo  -y
 
 ```
+
+Config file "php.ini", FRM standard.
+```
+sed -i '/file_uploads =/c\file_uploads = On ;' /etc/php/7.4/fpm/php.ini
+sed -i '/max_input_vars =/c\max_input_vars = 4000 ;' /etc/php/7.4/fpm/php.ini
+sed -i '/allow_url_fopen =/c\allow_url_fopen = On ;' /etc/php/7.4/fpm/php.ini
+sed -i '/short_open_tag =/c\short_open_tag = On ;' /etc/php/7.4/fpm/php.ini
+sed -i '/memory_limit =/c\memory_limit = 512M ;' /etc/php/7.4/fpm/php.ini
+sed -i '/post_max_size =/c\post_max_size = 2000M ;' /etc/php/7.4/fpm/php.ini
+sed -i '/cgi.fix_pathinfo =/c\cgi.fix_pathinfo = 0 ;' /etc/php/7.4/fpm/php.ini
+sed -i '/upload_max_filesize =/c\upload_max_filesize = 2000M ;' /etc/php/7.4/fpm/php.ini
+sed -i '/max_execution_time =/c\max_execution_time = 36000000 ;' /etc/php/7.4/fpm/php.ini
+sed -i '/max_input_time =/c\max_input_time = 600000000 ;' /etc/php/7.4/fpm/php.ini
+sed -i '/default_charset =/c\default_charset = "UTF-8" ;' /etc/php/7.4/fpm/php.ini
+sed -i '/max_file_uploads =/c\max_file_uploads = 20000 ;' /etc/php/7.4/fpm/php.ini
+
+```
+
 ## 5. Config Nginx
+Create Folder 
+```
+mkdir  /var/www/php_wordpress
+
+```
+And delete the existing default configuration file.
 ```
 sudo rm -R /etc/nginx/sites-available/default
 sudo rm -R /etc/nginx/sites-enabled/default
@@ -74,13 +98,83 @@ Configuring this file depends on the PHP version you have installed. If it's 7.4
 ln -s /etc/nginx/sites-available/php_wordpress /etc/nginx/sites-enabled/
 ```
 
+## 6. Install MariaDB
+```
+sudo apt install mariadb-server mariadb-client -y
+sudo systemctl stop mysql.service
+sudo systemctl start mysql.service
+sudo systemctl enable mysql.service
+
+```
+```
+mysql_secure_installation
+
+```
+You can set any password of your choice to configure Mariadb. etc: "passwordmdb" 
+And, create Account/Passwd for Database. Full access rights.
+```
+sudo mysql -u root -p passwordmdb
+```
+```
+	GRANT ALL PRIVILEGES ON *.* to 'account1'@'%' identified by 'passwordmdb1';
+	FLUSH PRIVILEGES;
+	GRANT ALL PRIVILEGES ON *.* to 'account2'@'%' identified by 'passwordmdb2';
+	FLUSH PRIVILEGES;
+
+	CREATE DATABASE php_wordpress;
+	CREATE DATABASE php_mybb;
+	EXIT;
+
+```
+
+## 7. Test
+Create file "info.php"
+```
+echo "
+<?php
+phpinfo();
+?>
+">> /var/www/php_wordpress/phpinfo.php
+
+chmod +x -R /var/www/php_wordpress/phpinfo.php
+```
+
+## 8. install Wordpress.
+
+```
+cd  /var/www/php_wordpress
+```
+```
+wget https://wordpress.org/latest.tar.gz
+```
+```
+tar -xvzf latest.tar.gz
+```
+```
+mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
+```
+```
+chown www-data:www-data -R *
+```
+
+Adding the following code to the end of the wp-config.php file via FTP will prevent WordPress from asking for an FTP username and password when installing plugins or themes:
+
+```php
+define('FS_METHOD', 'direct');
+```
+or
+```
+if(is_admin()) {
+add_filter('filesystem_method', create_function('$a', 'return "direct";' ));
+define('FS_CHMOD_DIR',0751);
+}
+
+```
+
+This code configures WordPress to use the direct file system method, which allows WordPress to write to the filesystem directly without asking for FTP credentials. However, please be cautious when making changes to your wp-config.php file, and make sure you have a backup in case anything goes wrong during the editing process.
 
 
-
-
-
-
-
+# END
 
 
 
