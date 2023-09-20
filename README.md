@@ -187,7 +187,8 @@ mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
 
 ```
 ```
-chown www-data:www-data 0777 *
+chown www-data:www-data -R *
+chmod 0777 -R /var/www/php_wordpress/
 
 ```
 ```
