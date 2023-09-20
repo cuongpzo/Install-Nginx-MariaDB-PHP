@@ -54,17 +54,17 @@ sed -i '/max_file_uploads =/c\max_file_uploads = 20000 ;' /etc/php/7.4/fpm/php.i
 ```
 
 ## 5. Config Nginx
-#### Create Folder 
+### Create Folder 
 ```
 mkdir  /var/www/php_wordpress
 
 ```
-#### And delete the existing default configuration file.
+### And delete the existing default configuration file.
 ```
 sudo rm -R /etc/nginx/sites-available/default
 sudo rm -R /etc/nginx/sites-enabled/default
 ```
-#### Create & Edit file Configuration 
+### Create & Edit file Configuration 
 ```
 sudo nano /etc/nginx/sites-available/php_wordpress
 ```
@@ -91,7 +91,7 @@ sudo nano /etc/nginx/sites-available/php_wordpress
 		}
 	}
 ```
-#### "fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;" 
+### "fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;" 
 
 Configuring this file depends on the PHP version you have installed. If it's 7.4, set it up this way; otherwise, you can customize it with the correct path.
 ```
@@ -128,7 +128,7 @@ sudo mysql -u root -p passwordmdb
 ```
 
 ## 7. Test
-#### Create file "info.php"
+### Create file "info.php"
 ```
 echo "
 <?php
@@ -157,7 +157,7 @@ mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
 chown www-data:www-data -R *
 ```
 
-#### Adding the following code to the end of the wp-config.php file via FTP will prevent WordPress from asking for an FTP username and password when installing plugins or themes:
+### Adding the following code to the end of the wp-config.php file via FTP will prevent WordPress from asking for an FTP username and password when installing plugins or themes:
 
 ```php
 define('FS_METHOD', 'direct');
