@@ -49,7 +49,8 @@ sudo apt install -y php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-
 
 ```
 
-Config file "php.ini", FRM standard.
+Config file "php.ini", FRM standard (php v7.4).
+When installing, you can check if you've installed the correct PHP version, and if necessary, adjust it accordingly.
 ```
 sed -i '/file_uploads =/c\file_uploads = On ;' /etc/php/7.4/fpm/php.ini
 sed -i '/max_input_vars =/c\max_input_vars = 4000 ;' /etc/php/7.4/fpm/php.ini
