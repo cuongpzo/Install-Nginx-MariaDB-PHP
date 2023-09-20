@@ -27,6 +27,9 @@ sudo apt -y upgrade
 ## 3. Install Nginx
 ```
 sudo apt install nginx -y
+
+```
+```
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
