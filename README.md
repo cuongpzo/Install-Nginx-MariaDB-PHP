@@ -91,7 +91,7 @@ sudo nano /etc/nginx/sites-available/php_wordpress
 		root /var/www/php_wordpress;
 
 		index  index.php index.html index.htm a.a;
-		server_name  serverphp.vltkk ;
+		server_name  serverphp ;
 
 		client_max_body_size 2G;
 		autoindex off;
