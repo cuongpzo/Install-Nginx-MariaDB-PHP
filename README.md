@@ -118,6 +118,9 @@ ln -s /etc/nginx/sites-available/php_wordpress /etc/nginx/sites-enabled/
 ## 6. Install MariaDB
 ```
 sudo apt install mariadb-server mariadb-client -y
+
+```
+```
 sudo systemctl stop mysql.service
 sudo systemctl start mysql.service
 sudo systemctl enable mysql.service
