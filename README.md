@@ -54,7 +54,7 @@ sed -i '/max_file_uploads =/c\max_file_uploads = 20000 ;' /etc/php/7.4/fpm/php.i
 ```
 
 ## 5. Config Nginx
-### Create Folder 
+### Create Folder Sourcecode web
 ```
 mkdir  /var/www/php_wordpress
 
