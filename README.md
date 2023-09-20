@@ -38,6 +38,9 @@ sudo systemctl enable nginx
 ## 4. Install PHP
 ```
 sudo apt-get install software-properties-common -y
+
+```
+```
 sudo add-apt-repository ppa:ondrej/php
 
 ```
