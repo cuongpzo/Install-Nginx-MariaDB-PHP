@@ -8,6 +8,9 @@ sudo apt install -y openssh-client openssh-server net-tools curl python3 unzip z
 ## 1. Firewall Setup
 ```
 sudo ufw allow ssh
+
+```
+```
 sudo ufw allow http
 sudo ufw enable
 
