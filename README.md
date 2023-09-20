@@ -139,7 +139,7 @@ phpinfo();
 chmod +x -R /var/www/php_wordpress/phpinfo.php
 ```
 
-## 8. install Wordpress.
+## 8. Install Wordpress.
 
 ```
 cd  /var/www/php_wordpress
