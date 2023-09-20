@@ -162,6 +162,10 @@ phpinfo();
 chmod +x -R /var/www/php_wordpress/phpinfo.php
 
 ```
+```
+systemctl restart nginx.service
+
+```
 
 
 ## 8. Install Wordpress.
