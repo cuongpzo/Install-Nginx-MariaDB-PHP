@@ -187,7 +187,7 @@ mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
 
 ```
 ```
-chown www-data:www-data -R *
+chown www-data:www-data 0777 *
 
 ```
 ```
