@@ -15,6 +15,7 @@ sudo ufw enable
 ## 2. Update Ubuntu
 ```
 sudo apt update
+
 ```
 ```
 sudo apt -y upgradde
@@ -32,6 +33,7 @@ sudo systemctl enable nginx
 ```
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php
+
 ```
 ```
 sudo apt install -y php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-dev php-imap php-mbstring php-opcache php-soap php-zip php-gmp php-intl php-fpm  php-dom php-json php-fileinfo  -y
@@ -65,10 +67,12 @@ mkdir  /var/www/php_wordpress
 ```
 sudo rm -R /etc/nginx/sites-available/default
 sudo rm -R /etc/nginx/sites-enabled/default
+
 ```
 ### Create & Edit file Configuration 
 ```
 sudo nano /etc/nginx/sites-available/php_wordpress
+
 ```
 ```
 	server {
@@ -98,6 +102,7 @@ sudo nano /etc/nginx/sites-available/php_wordpress
 Configuring this file depends on the PHP version you have installed. If it's 7.4, set it up this way; otherwise, you can customize it with the correct path.
 ```
 ln -s /etc/nginx/sites-available/php_wordpress /etc/nginx/sites-enabled/
+
 ```
 
 ## 6. Install MariaDB
@@ -116,6 +121,7 @@ You can set any password of your choice to configure Mariadb. etc: "passwordmdb"
 And, create Account/Passwd for Database. Full access rights.
 ```
 sudo mysql -u root -p passwordmdb
+
 ```
 ```
 	GRANT ALL PRIVILEGES ON *.* to 'account1'@'%' identified by 'passwordmdb1';
@@ -138,25 +144,33 @@ phpinfo();
 ?>
 ">> /var/www/php_wordpress/phpinfo.php
 
+```
+```
 chmod +x -R /var/www/php_wordpress/phpinfo.php
+
 ```
 
 ## 8. Install Wordpress.
 
 ```
 cd  /var/www/php_wordpress
+
 ```
 ```
 wget https://wordpress.org/latest.tar.gz
+
 ```
 ```
 tar -xvzf latest.tar.gz
+
 ```
 ```
 mv /var/www/php_wordpress/wordpress/* /var/www/php_wordpress/
+
 ```
 ```
 chown www-data:www-data -R *
+
 ```
 
 ### Adding the following code to the end of the wp-config.php file via FTP will prevent WordPress from asking for an FTP username and password when installing plugins or themes:
