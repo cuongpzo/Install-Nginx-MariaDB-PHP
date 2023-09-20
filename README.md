@@ -213,6 +213,67 @@ define('FS_CHMOD_DIR',0751);
 This code configures WordPress to use the direct file system method, which allows WordPress to write to the filesystem directly without asking for FTP credentials. However, please be cautious when making changes to your wp-config.php file, and make sure you have a backup in case anything goes wrong during the editing process.
 
 
+## Install phpAdmin
+```
+mkdir /phpadmin
+
+```
+```
+cd /phpadmin
+
+```
+```
+wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.zip
+
+```
+```
+unzip phpMyAdmin-5.1.1-all-languages.zip
+
+```
+```
+mv phpMyAdmin-5.1.1-all-languages /phpadmin/admin
+
+```
+```
+nano /etc/nginx/sites-available/phpmyadmin
+
+```
+```
+	server {
+		listen 8888;
+		listen [::]:8888;
+		root /phpadmin/admin;
+		index  index.php index.html index.htm a.a;
+		server_name  phpadmin.local ;
+
+		client_max_body_size 2G;
+		client_body_timeout 60000s;
+		client_header_timeout 6000s;
+		
+		
+		autoindex off;
+		location / {
+			try_files $uri $uri/ /index.php?$args;
+		}
+
+		location ~ \.php$ {
+			 include snippets/fastcgi-php.conf;
+			 fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+			 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			 include fastcgi_params;
+		}
+	}
+
+```
+```
+ln -s /etc/nginx/sites-available/phpmyadmin /etc/nginx/sites-enabled/
+
+```
+```
+sudo systemctl restart nginx
+
+```
+
 # END
 
 
